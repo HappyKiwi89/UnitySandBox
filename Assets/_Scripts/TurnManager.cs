@@ -19,11 +19,25 @@ public class TurnManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        // Spawn player at different positions depending on if you're Player 1 or 2
+        if (PhotonNetwork.IsMasterClient)
+    {
+        // Spawn Player 1's fort on left
+        //PhotonNetwork.Instantiate("FortPlayer1", new Vector2(-7, -3), Quaternion.identity);
+        // Spawn Player 1's player prefab as before
+        PhotonNetwork.Instantiate("Player1", new Vector2(-2, 0), Quaternion.identity);
+    }
+    else
+    {
+        // Spawn Player 2's fort on right
+        //PhotonNetwork.Instantiate("FortPlayer2", new Vector2(7, -3), Quaternion.identity);
+        // Spawn Player 2's player prefab as before
+        PhotonNetwork.Instantiate("Player2", new Vector2(2, 0), Quaternion.identity);
+    }
+        string prefabToSpawn = PhotonNetwork.IsMasterClient ? "Player1" : "Player2";
         Vector2 spawnPos = PhotonNetwork.IsMasterClient ? new Vector2(-2, 0) : new Vector2(2, 0);
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPos, Quaternion.identity);
 
-        // Set turn based on who is Master Client (Player 1)
-        isMyTurn = PhotonNetwork.IsMasterClient;
+        PhotonNetwork.Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+
+        TurnManager.isMyTurn = PhotonNetwork.IsMasterClient;
     }
 }
