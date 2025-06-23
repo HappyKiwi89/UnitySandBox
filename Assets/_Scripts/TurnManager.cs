@@ -4,8 +4,7 @@ using Photon.Realtime;
 
 public class TurnManager : MonoBehaviourPunCallbacks
 {
-    public GameObject playerPrefab;
-    public static bool isMyTurn = false;
+    public static bool isMyTurn { get; private set; }
 
     void Start()
     {
@@ -14,30 +13,41 @@ public class TurnManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        // Join or create a 2-player room
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
     }
 
     public override void OnJoinedRoom()
     {
+        SetupCamera();
+
         if (PhotonNetwork.IsMasterClient)
-    {
-        // Spawn Player 1's fort on left
-        //PhotonNetwork.Instantiate("FortPlayer1", new Vector2(-7, -3), Quaternion.identity);
-        // Spawn Player 1's player prefab as before
-        PhotonNetwork.Instantiate("Player1", new Vector2(-2, 0), Quaternion.identity);
-    }
-    else
-    {
-        // Spawn Player 2's fort on right
-        //PhotonNetwork.Instantiate("FortPlayer2", new Vector2(7, -3), Quaternion.identity);
-        // Spawn Player 2's player prefab as before
-        PhotonNetwork.Instantiate("Player2", new Vector2(2, 0), Quaternion.identity);
-    }
-        string prefabToSpawn = PhotonNetwork.IsMasterClient ? "Player1" : "Player2";
-        Vector2 spawnPos = PhotonNetwork.IsMasterClient ? new Vector2(-2, 0) : new Vector2(2, 0);
+        {
+            isMyTurn = true;
+        }
+        else
+        {
+            isMyTurn = false;
+        }
 
-        PhotonNetwork.Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+        AudioController.Instance.PlaySound("Soundtrack1");
+    }
 
-        TurnManager.isMyTurn = PhotonNetwork.IsMasterClient;
+    private void SetupCamera()
+    {
+        Camera cam = Camera.main;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            cam.transform.position = new Vector3(-5f, 0f, -10f);  // Example position for player 1 view
+        }
+        else
+        {
+            cam.transform.position = new Vector3(5f, 0f, -10f);   // Example position for player 2 view
+        }
+
+        cam.orthographic = true;
+        cam.orthographicSize = 5f;  // Adjust as needed for your battlefield size
     }
 }
+
