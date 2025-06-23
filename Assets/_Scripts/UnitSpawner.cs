@@ -5,8 +5,8 @@ public class UnitSpawner : MonoBehaviourPun
 {
     [SerializeField] private UiController uiController;
     [SerializeField] private string rechidPrefabName = "RechidPrefab";  // Name of the prefab in Resources
-    [SerializeField] private Transform spawnPointPlayer1;  // For MasterClient
-    [SerializeField] private Transform spawnPointPlayer2;  // For second player
+    [SerializeField] private Transform Player1UnitSpawn;  // For MasterClient
+    [SerializeField] private Transform Player2UnitSpawn;  // For second player
 
     public void BuyUnit()
     {
@@ -21,11 +21,11 @@ public class UnitSpawner : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            return spawnPointPlayer1.position;
+            return Player1UnitSpawn.position;
         }
         else
         {
-            return spawnPointPlayer2.position;
+            return Player2UnitSpawn.position;
         }
     }
 }

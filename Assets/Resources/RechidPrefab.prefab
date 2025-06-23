@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 2672677557127232316}
   - component: {fileID: 4947899520381975781}
   - component: {fileID: 1128612652109273640}
-  - component: {fileID: 4018633868237395303}
   m_Layer: 0
-  m_Name: Rechid
+  m_Name: RechidPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 6866246565055275487}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.253, y: -2.91, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -18.76, y: -6.83, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -186,19 +185,3 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4018633868237395303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6866246565055275487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7523599302e120428394861690a9746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiController: {fileID: 0}
-  rechidPrefab: {fileID: 6866246565055275487}
-  spawnPointPlayer1: {fileID: 759589699894376975}
-  spawnPointPlayer2: {fileID: 759589699894376975}

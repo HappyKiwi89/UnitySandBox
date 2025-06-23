@@ -4,17 +4,22 @@ using UnityEngine;
 public class UiController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI goldText;
-    private int gold = 100; // starting gold
+    private int gold = 100;
+
+    [SerializeField] private UnitSpawner unitSpawner;
 
     private void Start()
     {
-        UpdateGoldText();
+        UpdateGoldUI();
     }
 
-    public void AddGold(int amount)
+    public void BuyUnitButtonPressed()
     {
-        gold += amount;
-        UpdateGoldText();
+        if (TrySpendGold(50))
+        {
+            Debug.Log("Unit bought!");
+            unitSpawner.BuyUnit();  // spawn unit via Photon here
+        }
     }
 
     public bool TrySpendGold(int amount)
@@ -22,23 +27,18 @@ public class UiController : MonoBehaviour
         if (gold >= amount)
         {
             gold -= amount;
-            UpdateGoldText();
+            UpdateGoldUI();
             return true;
         }
         else
         {
-            // optionally show error or disable button
+            Debug.Log("Not enough gold");
             return false;
         }
     }
 
-    private void UpdateGoldText()
+    private void UpdateGoldUI()
     {
-        goldText.text = $"Gold: {gold}";
-    }
-    public void BuySkelly()
-    {
-        gold -= 20;
-        UpdateGoldText();
+        goldText.text = "Gold: " + gold;
     }
 }
