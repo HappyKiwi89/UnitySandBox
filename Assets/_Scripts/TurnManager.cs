@@ -33,7 +33,6 @@ public class TurnManager : MonoBehaviourPunCallbacks
         AudioController.Instance.PlaySound("Soundtrack1");
     }
 
-
     void SetupCamera()
     {
         CameraFollow camFollow = Camera.main.GetComponent<CameraFollow>();
@@ -50,6 +49,5 @@ public class TurnManager : MonoBehaviourPunCallbacks
         Camera.main.orthographic = true;
         Camera.main.orthographicSize = 5f; // Adjust as needed
     }
-
 }
 

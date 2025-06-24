@@ -10,7 +10,7 @@ public class UnitSpawner : MonoBehaviourPun
 
     public void BuyUnit()
     {
-        if (uiController.TrySpendGold(50))
+        if (uiController.TrySpendGold(15))
         {
             Vector3 spawnPos = GetSpawnPosition();
             PhotonNetwork.Instantiate(rechidPrefabName, spawnPos, Quaternion.identity);

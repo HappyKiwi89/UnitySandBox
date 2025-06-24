@@ -15,7 +15,7 @@ public class UiController : MonoBehaviour
 
     public void BuyUnitButtonPressed()
     {
-        if (TrySpendGold(50))
+        if (TrySpendGold(0))
         {
             Debug.Log("Unit bought!");
             unitSpawner.BuyUnit();  // spawn unit via Photon here
